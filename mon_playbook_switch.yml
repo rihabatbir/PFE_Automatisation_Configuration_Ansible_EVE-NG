@@ -1,0 +1,18 @@
+---
+- name: Obtenir des informations sur le switch
+  hosts: SW1
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_user: pfe
+    ansible_password: pfe
+    ansible_network_os: ios
+  tasks:
+    - name: Récupérer les faits sur le switch
+      ios_facts:
+      register: switch_facts
+
+    - name: Afficher les informations récupérées
+      debug:
+        var: switch_facts
+
