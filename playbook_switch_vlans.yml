@@ -1,1 +1,28 @@
+---
+- name: Configure VLANs on switches
+  hosts: SW1
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: ios
+    ansible_user: pfe
+    ansible_ssh_pass: pfe
+  tasks:
+    - name: Define VLANs
+      ios_config:
+        lines:
+          - vlan 2
+          - name vlan2
+          - vlan 3
+          - name vlan3
+          - vlan 4
+          - name vlan4
+      register: result
+    - name: Save configuration
+      ios_config:
+        lines:
+          - exit
+
+
+
 
