@@ -20,7 +20,7 @@ installation putty
 Installation des images iso switch routeur .. et fixer les permissions
 
 #### Développement de la fonctionnalité principale
-## Création d'un laboratoire
+##### Création d'un laboratoire
 
 Le laboratoire se compose de trois switches et les mahines(VPCS).
 Un switch est configuré en tant que serveur VTP et VLAN 1.
