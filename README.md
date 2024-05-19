@@ -40,4 +40,16 @@ Un playbook pour tester le ping sur les switches.
 Un playbook pour configurer les VLANs sur les switches.
 ##### Tests unitaires et intégration continue pour assurer la fiabilité
 Nous avons testé la création des VLANs sur les switches.
-Nous avons testé le ping entre les machines
+Nous avons testé le ping entre les machines.
+
+#### Utilisation de l'outil de gestion de versions et des configurations dans le développement logiciel  : Git 
+
+Git joue un rôle essentiel dans l'utilisation d'Ansible, en fournissant une base solide pour la gestion des configurations et la collaboration sur les playbooks. Voici comment Git est intégré dans les workflows Ansible 
+
+1. Gestion de la Configuration
+Git permet de suivre toutes les modifications apportées aux playbooks Ansible. Chaque changement est enregistré sous forme de commit, ce qui facilite la gestion des différentes versions et le retour à une version antérieure si nécessaire.
+
+2. Collaboration
+Git permet à plusieurs utilisateurs de travailler sur les mêmes fichiers de manière simultanée. Les développeurs peuvent cloner le dépôt Git, apporter leurs modifications et soumettre des pull requests pour révision.
+3. Intégration Continue (CI) et Déploiement Continu (CD)
+Tests Automatisés : En intégrant Git avec des outils de CI/CD (comme GitHub Actions), nous avons automatiser les tests de vos playbooks Ansible. Chaque fois qu'un changement est poussé dans le dépôt, les tests sont exécutés pour s'assurer que les nouvelles configurations ne cassent rien.
