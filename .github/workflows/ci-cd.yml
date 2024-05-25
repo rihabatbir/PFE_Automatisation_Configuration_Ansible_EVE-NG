@@ -55,4 +55,3 @@ jobs:
         run: ansible-playbook -i inventory/production playbook.yml
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-
