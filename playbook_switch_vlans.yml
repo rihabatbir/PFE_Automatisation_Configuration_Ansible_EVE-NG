@@ -22,7 +22,10 @@
       ios_config:
         lines:
           - exit
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 959f2b4 (Add CI/CD workflow)
 
