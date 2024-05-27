@@ -1,0 +1,29 @@
+---
+- name: Configurer les logs
+  hosts: R1
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: ios
+    ansible_user: pfe
+    ansible_password: pfe
+
+  tasks:
+    - name: Configurer les logs
+      ios_config:
+        lines:
+          - logging buffered 10000
+          - logging console critical
+          - logging monitor informational
+          - logging trap debugging
+
+    - name: Configurer les utilisateurs locaux
+      ios_config:
+        lines:
+          - username admin secret password123
+          - username user1 secret user1pass
+
+
+
+
+

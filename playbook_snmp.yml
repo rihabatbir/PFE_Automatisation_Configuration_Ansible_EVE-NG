@@ -1,0 +1,23 @@
+---
+- name: Configuration de SNMP
+  hosts: R1
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: ios
+    ansible_user: pfe
+    ansible_password: pfe
+
+  tasks:
+
+    - name: Configurer le serveur SNMP
+      ios_config:
+        lines:
+          - snmp-server community public RO
+          - snmp-server community private RW
+          - snmp-server host 192.168.1.100 version 2c public
+
+
+
+
+

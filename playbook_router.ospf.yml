@@ -1,0 +1,26 @@
+---
+- name: Activer OSPF sur un routeur Cisco IOS
+  hosts: R1
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: ios
+    ansible_user: pfe
+    ansible_password: pfe
+
+  tasks:
+    - name: Configurer OSPF
+      ios_config:
+        lines:
+          - router ospf 1
+          - network 10.10.0.0 0.0.0.255 area 0
+        parents: router ospf 1
+      register: ospf_config
+
+
+
+
+
+
+
+

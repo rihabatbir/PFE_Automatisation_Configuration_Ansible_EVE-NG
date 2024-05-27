@@ -1,0 +1,25 @@
+---
+- name: Configurer une ACL pour filtrer le trafic sortant sur l'interface WAN
+  hosts: R1
+  gather_facts: no
+  connection: network_cli
+  vars:
+    ansible_network_os: ios
+    ansible_user: pfe
+    ansible_password: pfe
+
+  tasks:
+    - name: Configurer une liste de contrôle d'accès (ACL) pour le trafic sortant
+      ios_config:
+        lines:
+          - access-list 101 deny   tcp any any eq telnet
+          - access-list 101 permit tcp any any
+          - access-list 101 permit udp any any
+          - access-list 101 permit icmp host 192.168.202.132 any
+          - access-list 101 permit icmp any any echo-reply
+          - access-list 101 permit icmp any any time-exceeded
+          - access-list 101 permit icmp any any unreachable
+        parents: ip access-list extended 101
+
+
+
