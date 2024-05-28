@@ -29,6 +29,9 @@ jobs:
       - name: Lint Ansible playbooks
         run: ansible-lint .
 
+      - name: Test Ansible roles with Molecule
+        run: molecule test
+
 
   deploy:
     needs: test
