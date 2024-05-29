@@ -19,19 +19,21 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.8'
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ansible ansible-lint molecule docker
+          pip install ansible ansible-lint molecule[docker] docker
+
+      - name: Install Ansible Galaxy roles
+        run: ansible-galaxy install -r requirements.yml
 
       - name: Lint Ansible playbooks
         run: ansible-lint .
 
       - name: Test Ansible roles with Molecule
         run: molecule test
-
 
   deploy:
     needs: test
@@ -45,7 +47,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: '3.8'
 
       - name: Install Ansible
         run: |
