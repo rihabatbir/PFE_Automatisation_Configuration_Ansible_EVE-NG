@@ -1,5 +1,5 @@
 #- src: geerlingguy.docker
 #- src: geerlingguy.pip
-ollections:
+collections:
   - name: community.docker
     version: ">=3.10.2"
