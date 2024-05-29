@@ -27,7 +27,7 @@ jobs:
           pip install ansible ansible-lint molecule[docker] docker
 
       - name: Install Ansible Galaxy roles
-        run: ansible-galaxy install -r requirements.yml
+        run: ansible-galaxy install -r molecule/default/requirements.yml
 
       - name: Lint Ansible playbooks
         run: ansible-lint .
