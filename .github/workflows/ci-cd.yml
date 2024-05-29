@@ -55,6 +55,6 @@ jobs:
           pip install ansible
 
       - name: Deploy to production
-        run: ansible-playbook -i inventory/production playbook.yml
+        run: ansible-playbook -i inventory/production playbook_ping_router.yml
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
