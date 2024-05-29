@@ -4,7 +4,7 @@ dependency:
     requirements-file: requirements.yml
 
 driver:
-  name: delegated
+    name: docker
 
 platforms:
   - name: molecule-ubuntu
