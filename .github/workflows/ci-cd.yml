@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ansible ansible-lint molecule[docker] docker
+          pip install ansible ansible-lint molecule
 
       - name: Install Ansible Galaxy roles
         run: ansible-galaxy install -r molecule/default/requirements.yml
