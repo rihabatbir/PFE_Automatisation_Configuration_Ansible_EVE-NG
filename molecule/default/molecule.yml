@@ -1,11 +1,9 @@
----
-dependency:
-  name: galaxy
-  options:
-    requirements-file: molecule/default/requirements.yml
+name: galaxy
+options:
+  requirements-file: molecule/default/requirements.yml
 
 driver:
-  name: delegated  # Utilisation du driver par défaut (delegated) pour les tests
+  name: delegated
 
 platforms:
   - name: molecule-ubuntu
@@ -35,3 +33,4 @@ verifier:
   name: testinfra
   lint:
     name: flake8
+
