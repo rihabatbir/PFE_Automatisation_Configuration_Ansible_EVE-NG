@@ -1,4 +1,5 @@
 name: CI/CD Pipeline
+
 on:
   push:
     branches:
@@ -20,10 +21,10 @@ jobs:
         with:
           python-version: '3.9'
 
-       - name: Install dependencies
+      - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ansible ansible-lint molecule
+          pip install ansible ansible-lint molecule[docker] docker
 
       - name: Install Ansible Galaxy roles
         run: ansible-galaxy install -r molecule/default/requirements.yml
@@ -32,9 +33,7 @@ jobs:
         run: ansible-lint .
 
       - name: Test Ansible roles with Molecule
-        uses: ansible/molecule-github-action@v1
-        with:
-          args: test
+        run: molecule test
 
   deploy:
     needs: test
@@ -59,4 +58,3 @@ jobs:
         run: ansible-playbook -i inventory/production playbook.yml
         env:
           ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
-
