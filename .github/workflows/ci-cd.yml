@@ -1,35 +1,60 @@
 name: CI/CD Pipeline
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
 
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install ansible
-        pip install molecule[docker]
-        pip install docker
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible ansible-lint molecule[docker] docker
 
-    - name: Clean up Docker
-      run: |
-        docker system prune -af
+      - name: Install Ansible Galaxy roles
+        run: ansible-galaxy install -r requirements.yml
 
-    - name: Lint Ansible playbooks
-      run: |
-        ansible-lint
+      - name: Lint Ansible playbooks
+        run: ansible-lint .
 
-    - name: Test Ansible roles with Molecule
-      run: |
-        molecule --debug test
+      - name: Test Ansible roles with Molecule
+        run: molecule test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install Ansible
+        run: |
+          python -m pip install --upgrade pip
+          pip install ansible
+
+      - name: Deploy to production
+        run: ansible-playbook -i inventory/production playbook.yml
+        env:
+          ANSIBLE_VAULT_PASSWORD: ${{ secrets.ANSIBLE_VAULT_PASSWORD }}
