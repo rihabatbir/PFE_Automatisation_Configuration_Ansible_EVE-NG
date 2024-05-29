@@ -1,6 +1,4 @@
 name: CI/CD Pipeline
-description: Workflow for CI/CD Pipeline
-
 on:
   push:
     branches:
